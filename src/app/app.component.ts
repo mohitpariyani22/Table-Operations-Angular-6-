@@ -11,6 +11,7 @@ import { PagerService } from './services/pager.service'
 })
 
 export class AppComponent implements OnInit {
+  
   editing = {};
   rows = [];
   headers = [];
@@ -51,7 +52,6 @@ export class AppComponent implements OnInit {
   private data: any[];
 
   private allItems: any[];
-
   // pager object
   pager: any = {};
 
@@ -164,18 +164,20 @@ export class AppComponent implements OnInit {
     }
 
     var sorter = function (a: any, b: any) {
+      let dateA:any;
+      let dateB:any;
       if (a[arrSort] === b[arrSort]) {     // identical? return 0
         return 0;
       }
       else if (starBool && arrSort == "date") {
-          let dateA = new Date(a[arrSort]);
-          let dateB = new Date(b[arrSort]);
-          return (dateA - dateB) > 0  ? 1 : -1;//For Dates
+        dateA = new Date(a[arrSort]);
+        dateB = new Date(b[arrSort]);
+        return (dateA - dateB) > 0 ? 1 : -1;//For Dates
       }
       else if (!starBool && arrSort == "date") {
-          let dateA = new Date(a[arrSort]);
-          let dateB = new Date(b[arrSort]);
-          return (dateA - dateB) > 0  ? -1 : 1;//For Dates
+        dateA = new Date(a[arrSort]);
+        dateB = new Date(b[arrSort]);
+        return (dateA - dateB) > 0 ? -1 : 1;//For Dates
       }
       else if (starBool && (arrSort == "user" || arrSort == "status"))
         return a[arrSort] < b[arrSort] ? -1 : 1; //For Strings 
